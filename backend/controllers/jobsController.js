@@ -73,6 +73,14 @@ exports.showJobs = async (req, res, next) => {
         }
     } : {}
 
+    // Filter jobs by category ids
+    let ids = [];
+    const jobTypeCategory = await JobType.find({}, { _id: 1 });
+    jobTypeCategory.forEach(cat => {
+        ids.push(cat._id);
+    });
+    let cat = req.query.cat;
+    let categ = cat !== '' ? cat : ids;
 
    
 }
