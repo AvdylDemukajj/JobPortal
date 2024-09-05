@@ -91,5 +91,10 @@ exports.showJobs = async (req, res, next) => {
    let setUniqueLocation = [...new Set(locations)];
    let location = req.query.location;
    let locationFilter = location !== '' ? location : setUniqueLocation;
+
+   // Enable pagination
+   const pageSize = 5;
+   const page = Number(req.query.pageNumber) || 1;
+   const count = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).countDocuments();
 }
 
