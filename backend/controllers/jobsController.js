@@ -60,3 +60,20 @@ exports.deleteJob = async (req, res, next) => {
         next(error);
     }
 }
+
+
+//show jobs.
+exports.showJobs = async (req, res, next) => {
+
+    //enable search 
+    const keyword = req.query.keyword ? {
+        title: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+
+
+   
+}
+
