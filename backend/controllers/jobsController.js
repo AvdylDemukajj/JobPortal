@@ -82,6 +82,14 @@ exports.showJobs = async (req, res, next) => {
     let cat = req.query.cat;
     let categ = cat !== '' ? cat : ids;
 
-   
+   // Jobs by location
+   let locations = [];
+   const jobByLocation = await Job.find({}, { location: 1 });
+   jobByLocation.forEach(val => {
+       locations.push(val.location);
+   });
+   let setUniqueLocation = [...new Set(locations)];
+   let location = req.query.location;
+   let locationFilter = location !== '' ? location : setUniqueLocation;
 }
 
