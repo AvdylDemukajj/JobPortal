@@ -47,4 +47,10 @@ app.use(
     }
   })
 );
+
+// Routes middleware
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+app.use('/api', jobTypeRoute);
+app.use('/api', jobRoute);
 // ...
