@@ -12,3 +12,7 @@ router.get('/user/:id', isAuthenticated, singleUser);
 router.put('/user/edit/:id', isAuthenticated, editUser);
 // /api/admin/user/delete/id
 router.delete('/admin/user/delete/:id', isAuthenticated, isAdmin, deleteUser);
+// /api/user/jobhistory
+router.post('/user/jobhistory', isAuthenticated, createUserJobsHistory);
+
+module.exports = router;
