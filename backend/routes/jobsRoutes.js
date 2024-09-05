@@ -10,3 +10,6 @@ router.post('/job/create', isAuthenticated, isAdmin, createJob);
 router.get('/job/:id', singleJob);
 // /api/job/update/job_id
 router.put('/job/update/:job_id', isAuthenticated, isAdmin, updateJob);
+// /api/job/delete/job_id
+router.delete('/job/delete/:job_id', isAuthenticated, isAdmin, deleteJob);
+
