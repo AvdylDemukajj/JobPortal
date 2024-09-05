@@ -6,4 +6,5 @@ const { isAuthenticated, isAdmin } = require('../middleware/auth');
 // Job type routes
 // /api/type/create
 router.post('/type/create', isAuthenticated, isAdmin, createJobType);
-
+// /api/type/jobs
+router.get('/type/jobs', allJobsType);
