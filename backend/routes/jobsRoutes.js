@@ -12,4 +12,7 @@ router.get('/job/:id', singleJob);
 router.put('/job/update/:job_id', isAuthenticated, isAdmin, updateJob);
 // /api/job/delete/job_id
 router.delete('/job/delete/:job_id', isAuthenticated, isAdmin, deleteJob);
+// /api/jobs/show
+router.get('/jobs/show', showJobs);
 
+module.exports = router;
