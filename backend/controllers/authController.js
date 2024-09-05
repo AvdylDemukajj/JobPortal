@@ -21,5 +21,33 @@ exports.signup = async (req, res, next) => {
     }
 }
 
+exports.signin = async (req, res, next) => {
 
+    try {
+        const { email, password } = req.body;
+        //validation
+        if (!email) {
+            return next(new ErrorResponse("please add an email", 403));
+        }
+        if (!password) {
+            return next(new ErrorResponse("please add a password", 403));
+        }
+
+        //check user email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return next(new ErrorResponse("invalid credentials", 400));
+        }
+        //check password
+        const isMatched = await user.comparePassword(password);
+        if (!isMatched) {
+            return next(new ErrorResponse("invalid credentials", 400));
+        }
+
+        sendTokenResponse(user, 200, res);
+
+    } catch (error) {
+        next(error);
+    }
+}
 
