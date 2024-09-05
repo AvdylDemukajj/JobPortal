@@ -26,3 +26,25 @@ mongoose.connect(process.env.DATABASE, {
 })
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
+
+// Middleware
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
+app.use(bodyParser.json({ limit: "5mb" }));
+app.use(bodyParser.urlencoded({
+  limit: "5mb",
+  extended: true
+}));
+app.use(cookieParser());
+app.use(cors());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "script-src": ["'self'", "https://www.gstatic.com/charts/loader.js"],
+      "img-src": ["'self'", "https: data:"]
+    }
+  })
+);
+// ...
