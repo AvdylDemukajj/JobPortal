@@ -88,3 +88,26 @@ export const registerAjobReducer = (state = {}, action) => {
             return state;
     }
 }
+
+// delete job by id
+export const deleteJobReducer = (state = {}, action) => {
+    switch (action.type) {
+        case DELETE_JOB_REQUEST:
+            return { loading: true }
+        case DELETE_JOB_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.success,
+                message: action.payload.message
+            }
+        case DELETE_JOB_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+        case DELETE_JOB_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
