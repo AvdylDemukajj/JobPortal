@@ -10,12 +10,14 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
+import { useSelector } from 'react-redux';
 
 const pages = ['Home', 'Log In'];
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const { userInfo } = useSelector(state => state.signIn);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -96,9 +98,20 @@ const Navbar = () => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                 >
-                    <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">Profile</Typography>
-                    </MenuItem>
+                    {userInfo ? (
+                        <>
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">Profile</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">Log Out</Typography>
+                            </MenuItem>
+                        </>
+                    ) : (
+                        <MenuItem onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center">Log In</Typography>
+                        </MenuItem>
+                    )}
                 </Menu>
             </Toolbar>
         </AppBar>
