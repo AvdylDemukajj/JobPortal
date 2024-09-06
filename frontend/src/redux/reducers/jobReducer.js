@@ -111,3 +111,25 @@ export const deleteJobReducer = (state = {}, action) => {
             return state;
     }
 }
+
+export const updateJobReducer = (state = {}, action) => {
+    switch (action.type) {
+        case EDIT_JOB_REQUEST:
+            return { loading: true }
+        case EDIT_JOB_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload.success,
+                job: action.payload.job
+            }
+        case EDIT_JOB_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+        case EDIT_JOB_RESET:
+            return {}
+        default:
+            return state;
+    }
+}
