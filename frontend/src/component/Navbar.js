@@ -10,8 +10,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { DarkMode, LightMode } from '@mui/icons-material';
+import { useTheme } from '@emotion/react';
+import { toggleActionTheme } from '../redux/actions/themeAction';
 
 const pages = ['Home', 'Log In'];
 
@@ -19,6 +22,8 @@ const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const { userInfo } = useSelector(state => state.signIn);
+    const dispatch = useDispatch();
+    const { palette } = useTheme();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -37,7 +42,7 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ bgcolor: palette.primary.main }}>
             <Toolbar>
                 <IconButton
                     size="large"
@@ -89,6 +94,13 @@ const Navbar = () => {
                         </MenuItem>
                     ))}
                 </Menu>
+                <IconButton sx={{ mr: 4 }} onClick={() => dispatch(toggleActionTheme())}>
+                    {palette.mode === "dark" ? (
+                        <DarkMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+                    ) : (
+                        <LightMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+                    )}
+                </IconButton>
                 <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt="User" src="/static/images/avatar/1.jpg" />
