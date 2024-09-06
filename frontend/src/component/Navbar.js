@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const pages = ['Home', 'Log In'];
 
@@ -49,11 +50,17 @@ const Navbar = () => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    JOB PORTAL
+                    <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                        JOB PORTAL
+                    </Link>
                 </Typography>
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                     {pages.map((page) => (
-                        <Button key={page} color="inherit">{page}</Button>
+                        <Button key={page} color="inherit">
+                            <Link to={`/${page.toLowerCase().replace(" ", "")}`} style={{ textDecoration: 'none', color: 'white' }}>
+                                {page}
+                            </Link>
+                        </Button>
                     ))}
                 </Box>
                 <Menu
@@ -74,7 +81,11 @@ const Navbar = () => {
                 >
                     {pages.map((page) => (
                         <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
+                            <Typography textAlign="center">
+                                <Link to={`/${page.toLowerCase().replace(" ", "")}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                    {page}
+                                </Link>
+                            </Typography>
                         </MenuItem>
                     ))}
                 </Menu>
