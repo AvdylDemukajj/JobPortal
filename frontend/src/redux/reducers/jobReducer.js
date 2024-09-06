@@ -46,3 +46,26 @@ export const loadJobReducer = (state = { jobs: [] }, action) => {
             return state;
     }
 }
+
+// single job reducer
+export const loadJobSingleReducer = (state = { job: {} }, action) => {
+    switch (action.type) {
+        case JOB_LOAD_SINGLE_REQUEST:
+            return { loading: true }
+        case JOB_LOAD_SINGLE_SUCCESS:
+            return {
+
+                loading: false,
+                success: action.payload.success,
+                singleJob: action.payload.job,
+
+            }
+        case JOB_LOAD_SINGLE_FAIL:
+            return { loading: false, error: action.payload }
+        case JOB_LOAD_SINGLE_RESET:
+            return {}
+        default:
+            return state;
+    }
+
+}
